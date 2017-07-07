@@ -1,7 +1,14 @@
 <html>
     <body>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+            <p>{{message}}</p>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
         <form action='/users' method="post">
-            Your name: <input type="text" name="name">
+            Your name: <input type="text" name="name" value={{session['name']}}>
             <br><br>
             Dojo location:
             <select name='location'>
@@ -17,7 +24,7 @@
                 <option value="Ruby">Ruby</option>
             </select>
             <br><br>
-            Comment: <textarea name='comment' rows="5" cols="50"></textarea>
+            Comment: <textarea name='comment' rows="5" cols="50">{{session['comment']}}</textarea>
             <br><br>
             <input type="submit" value="Submit">
         </form>
